@@ -20,9 +20,7 @@ def ball():
     global m
     canvas.move(ov, 0, m)
     x1, y1, x2, y2 = canvas.coords(ov)
-    if m < 0 and y1 <= 0:
-        m = m * -1
-    if m > 0 and y2 >= 600:
+    if (m < 0 and y1 <= 0) or (m > 0 and y2 >= 600):
         m = m * -1
         
 
