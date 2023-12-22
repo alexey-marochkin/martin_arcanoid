@@ -95,15 +95,7 @@ class Ball_controler:
                 ov[0].stepX = Vn2 * s - Vt2 * e
                 ov[0].stepY = Vn2 * e + Vt2 * s
                 nov[0].stepX = Vn1 * s - Vt1 * e
-                nov[0].stepY = Vn1 * e + Vt1 * s
-
-                #ov[0].x += ov[0].stepX * dt
-                #ov[0].y += ov[0].stepY * dt
-                #nov[0].x += nov[0].stepX * dt
-                #nov[0].y += nov[0].stepY * dt                
+                nov[0].stepY = Vn1 * e + Vt1 * s         
 
                 ov[0].canvas.move(ov[0].oval, ov[0].stepX * dt, ov[0].stepY * dt)
                 nov[0].canvas.move(nov[0].oval, nov[0].stepX * dt, nov[0].stepY * dt)
-
-                #ov[0].place()
-                #nov[0].place()
