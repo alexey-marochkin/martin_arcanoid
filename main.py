@@ -1,41 +1,44 @@
 from tkinter import *
+from ball import *
+import random
 
 root = Tk()
 root.title("Markonoid")
 root.geometry("800x600")
 
-ovals = [["ov1", 150, 100, -5, -20, "red"] , ["ov2", 375, 500, -10, -10, "blue"], ["ov3", 500, 300, -10, -10, "green"], ["ov4", 400, 200, -5, -10, "yellow"], ["ov5", 20, 80, -5, -10, "purple"]]
+ovals = [
+    
+         ["ov1", 50, 150, 100,  0.3, -0.3, "red"],
+         ["ov2", 150, 376, 500, -0.6, -5, "blue"],
+         ["ov3", 75, 500, 300, -5, -10, "green"],
+         ["ov4", 90, 400, 200, -15, -10, "brown"],
+         ["ov5", 25, 20, 80, -5, -10, "purple"],
+         ["ov6", 35, 120, 180, -5, -10, "yellow"],
+         ["ov7", 45, 220, 380, -5, -10, "magenta"]
+         
+         ]
 
+   
+
+     
 canvas = Canvas(bg="black", width=800, height=600)
 canvas.pack(anchor=CENTER, expand=1)
 
 for ov in ovals:
-    ov[0] = canvas.create_oval(ov[1], ov[2], ov[1] + 50, ov[2] + 50, width=2, outline=ov[5], fill=ov[5])
+    ov[0] = Ball(canvas, ov[1], ov[6], ov[2], ov[3], random.random(), random.random())
 
+ballsController = Ball_controler(ovals)
 
 def main():
+    
+    global ballsController
+
     for ov in ovals:
-        ov = ball(ov)
+        ov[0].move()
+        ballsController.check(ov)
 
-    root.after(50, main)
-
-def ball(ov):
-    # --------- oval -- mx----my----
-    canvas.move(ov[0], ov[3], ov[4])
-    x1, y1, x2, y2 = canvas.coords(ov[0])
-    if (ov[3] < 0 and x1 <= 0) or (ov[3] > 0 and x2 >= 800):
-        ov[3] = ov[3] * -1
-    if (ov[4] < 0 and y1 <= 0) or (ov[4] > 0 and y2 >= 600):
-        ov[4] = ov[4] * -1   
-    return ov
-
- 
-        
-
+    root.after(1, main)
+   
 main()
 
 root.mainloop()
-
-
-
-
