@@ -24,6 +24,8 @@ ovals = [
 canvas = Canvas(bg="black", width=800, height=600)
 canvas.pack(anchor=CENTER, expand=1)
 
+#anvas.create_line
+
 for ov in ovals:
     ov[0] = Ball(canvas, ov[1], ov[6], ov[2], ov[3], random.random(), random.random())
 
@@ -37,7 +39,7 @@ def main():
         ov[0].move()
         ballsController.check(ov)
 
-    root.after(1, main)
+    root.after(10, main)
    
 main()
 

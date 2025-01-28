@@ -1,7 +1,8 @@
 import math
+from tkinter import *
 
 class Ball:
-    def __init__(self, canvas, diametr, color, x, y, dx=0.5, dy=0.5, printCoords=False):
+    def __init__(self, canvas: Canvas, diametr, color, x, y, dx=0.5, dy=0.5, printCoords=False):
         self.diametr = diametr
         self.radius = self.diametr/2
         self.printCoords = printCoords
@@ -14,6 +15,7 @@ class Ball:
         self.canvasBottom = 600
         self.canvas = canvas
         self.oval = canvas.create_oval(self.x - self.radius, self.y - self.radius, self.x  + self.radius, self.y  + self.radius, width=2, outline = self.color, fill = self.color)
+        self.vector = self.canvas.create_line(self.x, self.y, self.x + self.stepX, self.y + self.stepY, width = 7, fill="white", arrow=LAST)
         if printCoords:
             self.coordsText = canvas.create_text(self.x, self.y, font=("system", 6), fill = "white")
 
@@ -36,6 +38,10 @@ class Ball:
         if (self.stepY < 0 and y1 <= 0) or (self.stepY > 0 and y2 >= self.canvasBottom):
             self.stepY = self.stepY * -1   
         #-------------------------------------------------------------------------------
+        
+        c = self.radius / math.sqrt(self.stepX * self.stepX + self.stepY * self.stepY)
+        self.canvas.coords(self.vector, self.x, self.y, self.x + self.stepX * c, self.y + self.stepY * c)
+         
         self.canvas.move(self.oval,self.stepX,self.stepY)
 
 class Ball_controler:
